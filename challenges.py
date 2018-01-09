@@ -14,7 +14,6 @@ def index():
 @app.route('/course/<course>')
 def course(course):
   return'Welcome to {}'.format(course)
-  
    #pass
 
 # Task 3.1
@@ -24,7 +23,7 @@ def enterData():
     s = """<!DOCTYPE html>
 <html>
 <body>
-<form>
+<form action ="/result" method ="POST">
   INGREDIENT:<br>
   <input type="text" name="ingredient" value="eggs">
   <br>
@@ -34,15 +33,25 @@ def enterData():
 </html>"""
 # Note that by default eggs would be entered in the input field
     return s
-
+#values are cues to what user should be entering into form
 
 ## Task 3.2
 ## Modify the function code and return statement
 ## to display recipes for the ingredient entered
-@app.route('/result',methods = ['POST', 'GET'])
+@app.route('/result', methods = ['GET', 'POST'])
 def displayData():
-    if request.method == 'POST':
-        pass
+  if request.method == 'POST':
+    data = request.form['ingredient']
+    baseurl = 'http://www.recipepuppy.com/api/'
+    resp = request.get(baseurl)
+    return data 
+  return "sorry use a form"
+    #   base_url =  'http://www.recipepuppy.com/api/'
+    #   params_diction = {}
+    #   params_diction['omelette']=q
+    #   resp = requests.get(baseurl, params+params_diction)
+    #   text = resp.text
+    #   return url
 
 ## Task 4
 ## Note : Since this is a dyanmic URL, recipes function should recieve a paramter called `ingrdient` 
