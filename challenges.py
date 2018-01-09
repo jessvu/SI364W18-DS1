@@ -14,6 +14,7 @@ def index():
 @app.route('/course/<course>')
 def course(course):
   return'Welcome to {}'.format(course)
+  
    #pass
 
 # Task 3.1
